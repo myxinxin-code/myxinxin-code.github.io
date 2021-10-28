@@ -623,7 +623,7 @@ body::after {
   position: fixed;
   height: 100vh;
   z-index: -2;
-  background: url("http://img.netbian.com/file/2021/0522/smallce9602becd381416760f63d74a578e571621697593.jpg") no-repeat center/cover;
+  background: url("/images/icons/t.jpg") no-repeat center/cover;
 }
 .container {
   white-space: normal;
@@ -681,7 +681,7 @@ body::after {
 }
 .content-wrap {
   width: calc(100% - 330px);
-  float: left;
+  float: right;
 }
 .content-wrap--noside {
   float: none;
@@ -908,18 +908,7 @@ body::after {
   z-index: 0;
   width: 100%;
   height: 100%;
-  background: url("http://img.netbian.com/file/2021/0522/smallce9602becd381416760f63d74a578e571621697593.jpg") no-repeat center/cover;
-}
-.header-banner::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background: url("/images/icons/top.jpg") no-repeat center/cover;
 }
 .header-banner-info {
   position: absolute;
@@ -997,7 +986,7 @@ body::after {
 }
 .sidebar-wrap {
   width: 300px;
-  float: right;
+  float: left;
 }
 .sidebar-nav {
   padding-bottom: 1em;
@@ -2151,7 +2140,7 @@ body::after {
   border-radius: 5px;
   padding: 1rem 2rem;
   background-color: var(--color-card);
-  float: left;
+  float: right;
 }
 .copy-button {
   position: absolute;
