@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="定义       宏就是编译器在预处理阶段进行的 文本替换 。 习惯上用大写字母表示&lt;宏名&gt;，目的是为了与变量名区分。常量用大写字母；变量用小写字母。 #define PI 3.1415926 如果某一个标识符被定义为宏名后，在取消该宏定义之前，不允许重新对它进行宏定义。 所以应记得及时的尽量取消宏定义： #undef &lt;标识符&gt; 。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#x2F;C++宏编程">
+<meta property="og:url" content="http://example.com/2021/10/29/C-C-%E5%AE%8F%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Welcome my blog !!!">
+<meta property="og:description" content="定义       宏就是编译器在预处理阶段进行的 文本替换 。 习惯上用大写字母表示&lt;宏名&gt;，目的是为了与变量名区分。常量用大写字母；变量用小写字母。 #define PI 3.1415926 如果某一个标识符被定义为宏名后，在取消该宏定义之前，不允许重新对它进行宏定义。 所以应记得及时的尽量取消宏定义： #undef &lt;标识符&gt; 。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-29T03:21:20.000Z">
+<meta property="article:modified_time" content="2021-10-29T03:39:21.025Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="C&#x2F;C++宏编程">
+<meta name="twitter:card" content="summary"><title>C/C++宏编程 | Welcome my blog !!!</title><link ref="canonical" href="http://example.com/2021/10/29/C-C-%E5%AE%8F%E7%BC%96%E7%A8%8B/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">Categories</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Welcome my blog !!!</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">C/C++宏编程</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-10-29</span></span></div></header><div class="post-body">
+        <h3 id="定义"   >
+          <a href="#定义" class="heading-link"><i class="fas fa-link"></i></a><a href="#定义" class="headerlink" title="定义"></a>定义</h3>
+      <p>宏就是编译器在预处理阶段进行的 文本替换 。 习惯上用大写字母表示&lt;宏名&gt;，目的是为了与变量名区分。常量用大写字母；变量用小写字母。 #define PI 3.1415926</p>
+<p>如果某一个标识符被定义为宏名后，在取消该宏定义之前，不允许重新对它进行宏定义。 所以应记得及时的尽量取消宏定义： #undef &lt;标识符&gt; 。 #undef 比较多的用途是在使用宏之前先进行 #undef 以保证这个宏不会与先前的定义冲突。</p>
+
+        <h3 id="宏函数"   >
+          <a href="#宏函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#宏函数" class="headerlink" title="宏函数"></a>宏函数</h3>
+      <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define MIN(x,y) ((x) &lt; (y) ? (x) : (y))</span><br></pre></td></tr></table></div></figure>
+<p>但是在实际使用时，只有当写上MIN()，必须加括号，MIN才会被作为宏展开，否则不做任何处理。 编译器(预处理器)对宏只进行简单的文本替换，而 不会进行语法检查 ，所以更多的检查性工作得你自己来做。</p>
+
+        <h4 id="为什么要用宏来做函数？"   >
+          <a href="#为什么要用宏来做函数？" class="heading-link"><i class="fas fa-link"></i></a><a href="#为什么要用宏来做函数？" class="headerlink" title="为什么要用宏来做函数？"></a>为什么要用宏来做函数？</h4>
+      <ol>
+<li>鸭子原则：比如MIN宏适用于任何实现了operator&lt;的类型，包括自定义类型（这点与template类似）；</li>
+<li>效率最高：虽然使用inline提示符也将函数或模板定义为内联的，但这只是一种提示而已，到底编译器有没有优化还依赖于编译器的实现，而使用宏函数则是完全由代码本身控制。</li>
+</ol>
+
+        <h4 id="2个宏编程易犯的错误"   >
+          <a href="#2个宏编程易犯的错误" class="heading-link"><i class="fas fa-link"></i></a><a href="#2个宏编程易犯的错误" class="headerlink" title="2个宏编程易犯的错误"></a>2个宏编程易犯的错误</h4>
+      <ul>
+<li>谨慎地将宏定义中的 “参数” 和 整个宏 都用括弧括起来。</li>
+<li>防止宏的副作用 :<blockquote>
+<p>宏定义 #define MIN(A,B) ((A) &lt;= (B) ? (A) : (B)) 对 MIN(*p++, b) 的作用结果是： ((*p++) &lt;= (b) ? (*p++) : (*p++))<br>这个表达式会产生副作用，指针p会作三次++自增操作。 （因为， 宏的本质是文本替换 ）</p>
+</blockquote>
+</li>
+</ul>
+
+        <h4 id="特殊符号：”-、-”"   >
+          <a href="#特殊符号：”-、-”" class="heading-link"><i class="fas fa-link"></i></a><a href="#特殊符号：”-、-”" class="headerlink" title="特殊符号：”#、##”"></a>特殊符号：”#、##”</h4>
+      <ol>
+<li><p># 符号把一个符号直接转换为字符串，例如:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define STRING(x) #x;</span><br><span class="line">const char *str = STRING( test_string );</span><br></pre></td></tr></table></div></figure>
+<p>str的内容就是”test_string”，也就是说 #会把其后的符号直接加上双引号 , 即STRING( test_string )被扩展为 “test_string” 。</p>
+</li>
+<li><p>##符号会连接两个符号，从而产生新的符号(词法层次)，例如:</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define SIGN( x ) INT_##x</span><br><span class="line">int SIGN( 1 );</span><br></pre></td></tr></table></div></figure></li>
+</ol>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://example.com">John Doe</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://example.com/2021/10/29/C-C-%E5%AE%8F%E7%BC%96%E7%A8%8B/">http://example.com/2021/10/29/C-C-%E5%AE%8F%E7%BC%96%E7%A8%8B/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/C-C-%E5%AE%8F%E7%BC%96%E7%A8%8B/">C/C++宏编程</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/10/29/git-problem/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">git_problem</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/10/29/InterView/"><span class="paginator-prev__text">InterView</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">
+          定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8F%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">
+          宏函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E5%AE%8F%E6%9D%A5%E5%81%9A%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="toc-number">2.1.</span> <span class="toc-text">
+          为什么要用宏来做函数？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E4%B8%AA%E5%AE%8F%E7%BC%96%E7%A8%8B%E6%98%93%E7%8A%AF%E7%9A%84%E9%94%99%E8%AF%AF"><span class="toc-number">2.2.</span> <span class="toc-text">
+          2个宏编程易犯的错误</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%EF%BC%9A%E2%80%9D-%E3%80%81-%E2%80%9D"><span class="toc-number">2.3.</span> <span class="toc-text">
+          特殊符号：”#、##”</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/header.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://plus.google.com/" target="_blank" rel="noopener" data-popover="Google" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-google"></i></span></a><a class="sidebar-ov-social-item" href="https://twitter.com/" target="_blank" rel="noopener" data-popover="Twitter" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-twitter"></i></span></a><a class="sidebar-ov-social-item" href="https://youtube.com/" target="_blank" rel="noopener" data-popover="Youtube" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">5</div><div class="sidebar-ov-state-item__name">Archives</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">Categories</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">4</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>John Doe</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1.0.1/dist/canvas-nest.min.js" color="0,0,0" opacity="0.6" count="99" zIndex="-1"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
