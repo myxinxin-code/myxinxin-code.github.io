@@ -713,7 +713,7 @@ socket编程的流程（服务端、客户端）  ok
 <p>MySQL中锁的种类<br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44766883/article/details/105879308" >1</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/zhaoliang831214/article/details/89429334?utm_medium=distribute.pc_relevant.none-task-blog-2~default~essearch~vector-11.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~essearch~vector-11.no_search_link" >2</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://database.51cto.com/art/201910/604421.htm" >3</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://mysql.taobao.org/monthly/2016/01/01/" >4</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://xie.infoq.cn/article/a9d6332f79cd7c68b260804e4" >5</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p>网络编程 <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://834810071.github.io/2021/03/15/%E7%BD%91%E7%BB%9CIO/#more" >1</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.zhihu.com/question/26943938" >如何深刻理解Reactor和Proactor？ - 知乎</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40733949/article/details/93405054" >https进行SSL认证的全过程</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/27/redis-learning/">redis_learning</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-11-01</span></span></div></header><div class="post-body"><div class="post-excerpt">
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/27/redis-learning/">redis_learning</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-11-03</span></span></div></header><div class="post-body"><div class="post-excerpt">
         <h2 id="Redis-入门指南"   >
           <a href="#Redis-入门指南" class="heading-link"><i class="fas fa-link"></i></a><a href="#Redis-入门指南" class="headerlink" title="Redis 入门指南"></a>Redis 入门指南</h2>
       
@@ -968,6 +968,68 @@ socket编程的流程（服务端、客户端）  ok
 <li><p>从集合中弹出一个元素</p>
 <figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPOP key</span><br></pre></td></tr></table></div></figure>
 <p>SPOP命令会从集合中随机选择一个元素弹出。</p>
+</li>
+</ol>
+
+        <h3 id="有序集合类型"   >
+          <a href="#有序集合类型" class="heading-link"><i class="fas fa-link"></i></a><a href="#有序集合类型" class="headerlink" title="有序集合类型"></a>有序集合类型</h3>
+      
+        <h4 id="介绍-2"   >
+          <a href="#介绍-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h4>
+      <p>在集合类型的基础上有序集合类型为集合中的每个元素都关联了一个分数，这使得我们不仅可以完成插入、删除和判断元素是否存在等集合类型支持的操作，还能够获得分数最高（或最低）的前N个元素、获得指定分数范围内的元素等与分数有关的操作。虽然集合中每个元素都是不同的，但是它们的分数却可以相同。</p>
+<p>有序集合类型是使用散列表和跳跃表（Skip list）实现的，所以即使读取位于中间部分的数据速度也很快（时间复杂度是O(log(N))）</p>
+<p>列表中不能简单地调整某个元素的位置，但是有序集合可以（通过更改这个元素的分数）。有序集合要比列表类型更耗费内存。</p>
+
+        <h4 id="命令-4"   >
+          <a href="#命令-4" class="heading-link"><i class="fas fa-link"></i></a><a href="#命令-4" class="headerlink" title="命令"></a>命令</h4>
+      <ol>
+<li><p>增加元素</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZADD key score member [score member...]</span><br></pre></td></tr></table></div></figure>
+<p>ZADD命令用来向有序集合中加入一个元素和该元素的分数，如果该元素已经存在则会用新的分数替换原有的分数。ZADD命令的返回值是新加入到集合中的元素个数（不包含之前已经存在的元素）。<br>分数不仅可以是整数，还支持双精度浮点数,其中+inf和-inf分别表示正无穷和负无穷。</p>
+</li>
+<li><p>获得元素的分数</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSCORE key member</span><br></pre></td></tr></table></div></figure></li>
+<li><p>获得排名在某个范围的元素列表</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZRANGE key start stop [WITHSCORES]</span><br><span class="line">ZREVRANGE key start stop [WITHSCORES]</span><br></pre></td></tr></table></div></figure>
+<p>ZRANGE命令会按照元素分数从小到大的顺序返回索引从start到stop之间的所有元素（包含两端的元素）。ZRANGE命令与LRANGE命令十分相似，如索引都是从0开始，负数代表从后向前查找（-1表示最后一个元素）。<br>如果需要同时获得元素的分数的话可以在ZRANGE命令的尾部加上WITHSCORES参数，这时返回的数据格式就从“元素1，元素2，…，元素n”变为了“元素1，分数1，元素2，分数2，…，元素n， 分数n”<br>ZRANGE命令的时间复杂度为O(logn + m)（其中n为有序集合的基数，m为返回的元素个数）。<br>ZREVRANGE命令和ZRANGE的唯一不同在于ZREVRANGE命令是按照元素分数从大到小的顺序给出结果的。</p>
+</li>
+<li><p>获得指定分数范围的元素</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]</span><br></pre></td></tr></table></div></figure>
+<p>ZRANGEBYSCORE命令参数虽然多，但是都很好理解。该命令按照元素分数从小到大的顺序返回分数在min和max之间（包含min和max）的元素。<br>如果希望分数范围不包含端点值，可以在分数前加上“(”符号。<br>min和max还支持无穷大，同ZADD命令一样，-inf和+inf分别表示负无穷和正无穷。<br>了解SQL语句的读者对LIMIT offset count 应该很熟悉，在本命令中LIMIT offsetcount 与SQL中的用法基本相同，即在获得的元素列表的基础上向后偏移offset 个元素，并且只获取前 count 个元素。<br>那么，如果想获取分数低于或等于100分的前3个人怎么办呢？这时可以借助ZREVRANGEBYSCORE命令实现。对照前文提到的ZRANGE命令和ZREVRANGE命令之间的关系，相信读者很容易能明白ZREVRANGEBYSCORE命令的功能。需要注意的是ZREVRANGEBYSCORE命令不仅是按照元素分数从大往小的顺序给出结果的，而且它的min和max参数的顺序和ZRANGEBYSCORE命令是相反的。</p>
+</li>
+<li><p>增加某个元素的分数</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZINCRBY key increment member</span><br></pre></td></tr></table></div></figure>
+<p>ZINCRBY命令可以增加一个元素的分数，返回值是更改后的分数。 如果指定的元素不存在，Redis在执行命令前会先建立它并将它的分数赋为0再执行操作。</p>
+</li>
+<li><p>获得集合中元素的数量</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZCARD key</span><br></pre></td></tr></table></div></figure></li>
+<li><p>获得指定分数范围内的元素个数</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZCOUNT key min max</span><br></pre></td></tr></table></div></figure></li>
+<li><p>删除一个或多个元素</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZREM key member [member...]</span><br></pre></td></tr></table></div></figure>
+<p>ZREM命令的返回值是成功删除的元素数量（不包含本来就不存在的元素）。</p>
+</li>
+<li><p>按照排名范围删除元素</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZREMRANGEBYRANK key start stop</span><br></pre></td></tr></table></div></figure>
+<p>ZREMRANGEBYRANK命令按照元素分数从小到大的顺序（即索引0表示最小的值）删除处在指定排名范围内的所有元素，并返回删除的元素数量。    </p>
+</li>
+<li><p>按照分数范围删除元素</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZREMRANGEBYSCORE key min max</span><br></pre></td></tr></table></div></figure>
+<p>ZREMRANGEBYSCORE命令会删除指定分数范围内的所有元素，参数min和max的特性和ZRANGEBYSCORE命令中的一样。返回值是删除的元素数量。</p>
+</li>
+<li><p>获得元素的排名</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZRANK key member</span><br><span class="line">ZREVRANK key member</span><br></pre></td></tr></table></div></figure>
+<p>ZRANK命令会按照元素分数从小到大的顺序获得指定的元素的排名（从0开始，即分数最小的元素排名为0）。</p>
+</li>
+<li><p>计算有序集合的交集</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZINTERSTORE destination numkeys key [key...] [WEIGHTS weight [weight...]] [AGGREGATE SUM|MIN|MAX]</span><br></pre></td></tr></table></div></figure>
+<p>ZINTERSTORE命令用来计算多个有序集合的交集并将结果存储在destination键中（同样以有序集合类型存储），返回值为destination键中的元素个数。destination键中元素的分数是由AGGREGATE参数决定的。</p>
+<ul>
+<li>当AGGREGATE是SUM时（也就是默认值），destination键中元素的分数是每个参与计算的集合中该元素分数的和。</li>
+<li>当AGGREGATE是MIN时，destination键中元素的分数是每个参与计算的集合中该元素分数的最小值。</li>
+<li>当AGGREGATE是MAX时，destination键中元素的分数是每个参与计算的集合中该元素分数的最大值。</li>
+</ul>
+<p>ZINTERSTORE命令还能够通过WEIGHTS参数设置每个集合的权重，每个集合在参与计算时元素的分数会被乘上该集合的权重。</p>
 </li>
 </ol>
 </div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/26/hello-world/">Hello World</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-26</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">1985-10-26</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Welcome to <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>! This is your very first post. Check <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> or you can ask me on <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>.</p>
